@@ -1,4 +1,4 @@
-# Semana 10 - Introdução ao Sequelize
+# Semana 13 - Introdução ao Sequelize
 
 ## Rodar o repositório:
 
