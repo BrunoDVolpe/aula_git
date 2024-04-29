@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const Curso = require('../models/Curso')
 const { auth } = require('../middlewares/auth')
+const CursoController = require('../controllers/CursoController')
 
 const cursosRoutes = new Router()
 
@@ -32,38 +33,7 @@ cursosRoutes.post('/', async (req, res) => {
 // })
 
 // Ex. 3 - Get com Query Params
-cursosRoutes.get('/', auth, async (req, res) => {
-    let params = {}
-    if(req.query.nome) {
-        params = {...params, nome: req.query.nome}
-    }
-    if(req.query.duracao_horas){
-        params = {...params, duracao_horas: req.query.duracao_horas}
-    }
-
-    const cursos = await Curso.findAll({
-        where: params
-    })
-
-    res.json(cursos)
-})
-
-cursosRoutes.get('/', auth, async (req, res) => {
-    // Se não tiver o parâmetro, estamos dando o valor '' para não quebrar no where. Douglas disse que depois vão explicar como contornar isso.
-    let params = {}
-    if(req.query.nome) {
-        params = {...params, nome: req.query.nome}
-    }
-    if(req.query.duracao_horas){
-        params = {...params, duracao_horas: req.query.duracao_horas}
-    }
-
-    const cursos = await Curso.findAll({
-        where: params
-    })
-
-    res.json(cursos)
-})
+cursosRoutes.get('/', auth, CursoController.findAll)
 
 // Deletar de forma simples
 // Dessa forma, se o item não existir, a aplicação não vai quebrar, mas não teria porque 'estressar' o banco.
