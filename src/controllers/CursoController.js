@@ -38,6 +38,25 @@ class CursoController {
             res.status(500).json({error: 'Erro ao criar o curso.'})
         }
     }
+
+    async delete(req, res) {
+        try {
+            const { id } = req.params
+            const curso = await Curso.findByPk(id)
+        
+            if(!curso) {
+                return res.status(404).json({error: "Curso não encontrado"})
+            }
+        
+            await curso.destroy()
+        
+            return res.status(204).json({})
+    
+        } catch(err) {
+            console.log(err.message)
+            res.status(500).json({error: 'Erro ao deletar o curso.'})
+        }
+    }
 }
 
 module.exports = new CursoController()

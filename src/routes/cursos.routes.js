@@ -29,24 +29,7 @@ cursosRoutes.get('/', auth, CursoController.findAll)
 // })
 
 // Ex. 5 - Deletar validando se o item existe.
-cursosRoutes.delete('/:id', auth, async (req, res) => {
-    try {
-        const { id } = req.params
-        const curso = await Curso.findByPk(id)
-    
-        if(!curso) {
-            return res.status(404).json({error: "Não encontrado"})
-        }
-    
-        await curso.destroy()
-    
-        return res.status(204).json({})
-
-    } catch(err) {
-        console.log(err.message)
-        res.status(500).json({error: 'Erro ao deletar o curso.'})
-    }
-})
+cursosRoutes.delete('/:id', auth, CursoController.delete)
 
 // cursosRoutes.put('/:id', async (req, res) => {
 //     try {
