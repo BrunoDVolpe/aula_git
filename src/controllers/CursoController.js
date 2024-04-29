@@ -57,6 +57,40 @@ class CursoController {
             res.status(500).json({error: 'Erro ao deletar o curso.'})
         }
     }
+
+    async update(req, res) {
+        try {
+            const { id } = req.params
+            const { nome, duracao_horas } = req.body
+            
+            // Procurar curso
+            const curso = await Curso.findByPk(id)
+    
+            if(!curso) {
+                return res.status(404).json({error: "Curso não encontrado."})
+            }
+    
+            // Validar informações novas
+            if(!nome) {
+                return res.status(400).json({message: "O nome do curso é obrigatório"})
+            }
+            if(!(duracao_horas >= 40 && duracao_horas <= 200)) {
+                return res.status(400).json({message: "A duração do curso é obrigatória e deve ser entre 40 e 200 horas"})
+            }
+        
+            curso.update({
+                nome: nome,
+                duracao_horas: duracao_horas
+            })
+            curso.save()
+            
+            res.status(200).json(curso)
+    
+        } catch (error) {
+            console.log(error.message)
+            res.status(500).json({error: 'Erro ao atualizar o produto.'})
+        }
+    }
 }
 
 module.exports = new CursoController()
