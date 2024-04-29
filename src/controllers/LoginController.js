@@ -1,5 +1,6 @@
 const Aluno = require("../models/Aluno")
-const { sign } = require('jsonwebtoken')
+const { sign } = require("jsonwebtoken")
+const { compare } = require("bcryptjs")
 
 class LoginController{
     async login(req, res){
@@ -14,13 +15,24 @@ class LoginController{
             if(!password) {
                 return res.status(400).json({message: "A senha é obrigatória"})
             }
-    
+            
+            // Com a senha criptografada, mudamos a forma de comparar a senha.
+            // const aluno = await Aluno.findOne({
+            //     where: {email: email, password: password}
+            // })
+
             const aluno = await Aluno.findOne({
-                where: {email: email, password: password}
-            })
+                    where: {email: email}
+                })
     
             if(!aluno){
                 return res.status(404).json({message: "E-mail e/ou senha incorretos."})
+            }
+
+            const hashSenha = await compare(password, aluno.password)
+
+            if(hashSenha === false) {
+                return res.status(403).json({mensagem: "E-mail e/ou senha incorretos"})
             }
     
             // Para o JWT, precisamos gerar apenas o payload. Passamos o ID dentro do sub, o e-mail e aproveitamos e mandamos também o nome

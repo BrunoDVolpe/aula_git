@@ -54,6 +54,8 @@ up and down, ou seja, meu up será para excluir e, se der erro, eu crio novament
 `npm install dotenv`
 ### instalar o JsonWebToken ( JWT )
 `npm install jsonwebtoken`
+### instalar o BCrypt para criptografar a senha
+`npm install bcryptjs`
 
 ## Listar o que tem instalado (coloquei a mais como lembrete e estudo)
 ### To list globally installed packages with npm, you can use the npm ls command combined with the -g flag (short for global):
