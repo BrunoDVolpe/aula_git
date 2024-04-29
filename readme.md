@@ -58,7 +58,17 @@ up and down, ou seja, meu up será para excluir e, se der erro, eu crio novament
 `npm install bcryptjs`
 
 ## Listar o que tem instalado (coloquei a mais como lembrete e estudo)
-### To list globally installed packages with npm, you can use the npm ls command combined with the -g flag (short for global):
+#### To list globally installed packages with npm, you can use the npm ls command combined with the -g flag (short for global):
 `npm ls -g`
-### Alternatively, to list locally installed packages present in the node_modules folder of a project, you can navigate to your project and run the npm ls command (without the -g flag)
+#### Alternatively, to list locally installed packages present in the node_modules folder of a project, you can navigate to your project and run the npm ls command (without the -g flag)
 `npm ls`
+
+## Git Flow
+- Branches: main, develop e feature/[nome-do-recurso]
+- Clona a develop para a nova feature
+- Desenvolve a feature e termina com um "git push origin feature/[nome-da-feature]"
+- No github vai aparecer a branch, abriremos um pull request dessa feature para a develop.
+- Outra pessoa avaliará e aprovará (em projeto pessoal nós mesmos aprovamos) o request
+- Em nossa máquina, vamos para a branch develop e atualizaremos ela com o que está na nuvem, dando um "git pull origin develop"
+- Pronto, nosso projeto está atualizado e pronto para continuar.
+- OBS: comando git fetch atualizará localmente com as branches que estão na nuvem e diferem do nosso local
